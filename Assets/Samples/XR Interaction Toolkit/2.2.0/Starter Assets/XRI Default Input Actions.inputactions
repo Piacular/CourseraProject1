@@ -278,6 +278,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "aButtonDown",
+                    "type": "Button",
+                    "id": "3217ccdc-33cb-4906-b6cb-f7b97654e907",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -366,6 +375,17 @@
                     "processors": "ScaleVector2(x=0),StickDeadzone",
                     "groups": "Generic XR Controller",
                     "action": "Translate Anchor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "04047ce2-228e-4ee5-b422-a3065f548586",
+                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "aButtonDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
