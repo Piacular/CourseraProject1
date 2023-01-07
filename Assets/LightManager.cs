@@ -8,7 +8,7 @@ public class LightManager : MonoBehaviour
 {
     [SerializeField] GameObject Flashlight;
     public bool isActive = false;
-    private bool toggling = false;
+    //private bool toggling = false;
     //public AudioSource source;
     //public AudioClip onSound;
     //public AudioClip offSound;
@@ -17,7 +17,7 @@ public class LightManager : MonoBehaviour
     void Start()
     {
         isActive = false;
-        Flashlight.gameObject.SetActive(false);
+        Flashlight.SetActive(false);
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class LightManager : MonoBehaviour
             {
                 //source.PlayOneShot(onSound);
                 Debug.Log("Toggle on triggered, isActive = " + isActive);
-                Flashlight.gameObject.SetActive(true);
+                Flashlight.SetActive(true);
                 Debug.Log("Setting isActive to true");
                 isActive = true;
             }
@@ -43,7 +43,7 @@ public class LightManager : MonoBehaviour
             {
                 //source.PlayOneShot(offSound);
                 Debug.Log("Toggle off triggered, isActive = " + isActive);
-                Flashlight.gameObject.SetActive(false);
+                Flashlight.SetActive(false);
                 Debug.Log("Setting isActive to false");
                 isActive = false;
             }
