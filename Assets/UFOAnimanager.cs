@@ -9,6 +9,7 @@ public class UFOAnimanager : MonoBehaviour
     [SerializeField] GameObject Ship;
     [SerializeField] GameObject Lights;
     [SerializeField] GameObject MagicButton;
+    [SerializeField] GameObject Alien;
 
     //audio files
     public AudioSource Hum_Ab4, Hum_Db4, Hum_F3, Hum_F5, Hum_Ques, HovLoopSlo, HovLoopFst, HovLand, HovLeave;
@@ -17,6 +18,7 @@ public class UFOAnimanager : MonoBehaviour
     public Animator shipAnim;
     public Animator lightsAnim;
     MagicRockscript buttonScript;
+    AlienScript aScript;
     private bool ufoSummoned = false;
     private bool ufoHere = false;
     private bool lightsOn = false;
@@ -29,6 +31,7 @@ public class UFOAnimanager : MonoBehaviour
         Lights.SetActive(false);
         Ship.SetActive(false);
         buttonScript = MagicButton.GetComponent<MagicRockscript>();
+        aScript = Alien.GetComponent<AlienScript>();
     }
 
     public void PlayPitches()
@@ -80,6 +83,12 @@ public class UFOAnimanager : MonoBehaviour
             Debug.Log("UFO lights on.");
             //PlayPitches();
             lightsAnim.Play("LightsTurnOn");
+
+            if (!aScript.GetDescending())
+            {
+                Debug.Log("aScript.ComeDown()");
+                aScript.ComeDown();
+            }
         }
         else
         {
@@ -168,6 +177,7 @@ public class UFOAnimanager : MonoBehaviour
         Debug.Log("UFO Animanager 'ufoHere' set true");
         ufoHere = true;
         buttonScript.SetHere(true);
+        LightsOn();
     }
 
     public void SetSummonedTrue()
