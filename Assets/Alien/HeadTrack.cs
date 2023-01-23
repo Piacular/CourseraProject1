@@ -5,9 +5,11 @@ using UnityEngine;
 public class HeadTrack : MonoBehaviour
 {
     Animator animator;
+    //AlienScript alienScript;
     public bool ikActive = false, looking = false;
     public float lookWeight = 0;
-    public Transform gazeTarget;
+    [SerializeField] Transform gazeTarget;
+    [SerializeField] GameObject Alien;
 
     //dummy pivot
 
@@ -16,6 +18,7 @@ public class HeadTrack : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        //alienScript = Alien.GetComponent<AlienScript>();
 
         //Dummy Pivot
         objPivot = new GameObject("DummyPivot");
@@ -29,21 +32,29 @@ public class HeadTrack : MonoBehaviour
         //target position 1
         objPivot.transform.LookAt(gazeTarget);
         float pivotRotY = objPivot.transform.localRotation.y;
-        //Debug.Log("pivotRotY");
 
         //Distance limiter:
         float dist = Vector3.Distance(objPivot.transform.position, gazeTarget.position);
-        //Debug.Log(dist);
 
         //Rotation limiter:
-        if (pivotRotY < 0.6f && pivotRotY > -0.6f && dist < 5)
+        if (pivotRotY < 0.6f && pivotRotY > -0.6f && dist < 7)
         {
+            if (!looking)
+            {
+                Debug.Log("Looking set true");
+                looking = true;
+            }
             //Target tracking
             lookWeight = Mathf.Lerp(lookWeight, 1 ,Time.deltaTime * 2.5f);
         }
 
         else
         {
+            if (looking)
+            {
+                Debug.Log("Looking set false");
+                looking = false;
+            }
             //Target release
             lookWeight = Mathf.Lerp(lookWeight, 0, Time.deltaTime * 2.5f);
         }
@@ -68,5 +79,9 @@ public class HeadTrack : MonoBehaviour
                 animator.SetLookAtWeight(lookWeight);
             }
         }
+    }
+    public bool PlayerSeen()
+    {
+        return looking;
     }
 }

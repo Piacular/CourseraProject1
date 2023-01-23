@@ -1021,20 +1021,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &80266088
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148982136821}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2534964839176971238, guid: ceecd93159b7ffa48be8893fd7485169, type: 3}
 --- !u!1001 &82217882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4768,6 +4754,73 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1078069669}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &314379602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 314379604}
+  - component: {fileID: 314379603}
+  m_Layer: 0
+  m_Name: MovementRecognizer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &314379603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314379602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b24ba5a1edc77429c430ba07e278dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputSource1: 5
+  inputButton1: 2
+  inputButton2: 3
+  movementSource1: {fileID: 2102357597}
+  inputSource2: 4
+  inputButton21: 2
+  inputButton22: 3
+  movementSource2: {fileID: 2034660816}
+  inputThreshhold: 0.1
+  DebugCubePrefab1: {fileID: 675499221636635310, guid: c4ee53c99d5e70d409605cbfd1419eff,
+    type: 3}
+  DebugCubePrefab2: {fileID: 675499221636635310, guid: 196da9c3ea3cb004f942b012c2da165d,
+    type: 3}
+  creationMode: 0
+  newGestureName: Wave
+  alienScript: {fileID: 0}
+  isWaitingForWave: 0
+  AlienAnim: {fileID: 0}
+  recognitionThreshhold: 0.9
+  OnRecognized:
+    m_PersistentCalls:
+      m_Calls: []
+  newPositionThresholdDistance: 0.05
+--- !u!4 &314379604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314379602}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.27473202, y: -1.0098355, z: -8.606171}
+  m_LocalScale: {x: 3.333333, y: 3.333333, z: 3.333333}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 413500533}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &317408663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6318,11 +6371,14 @@ MonoBehaviour:
   HandsTransform: {fileID: 0}
   ShipSeatQuat: {x: 0, y: 0, z: 0, w: 0}
   AlienAnim: {fileID: 0}
+  headTrack: {fileID: 0}
   Carrying: 0
   Piloting: 0
   Descending: 0
   Grounded: 0
-  RotateSpeed: 10
+  playerSeen: 0
+  RotateSpeed: 0
+  movementRecognizer: {fileID: 0}
 --- !u!54 &413500529
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6369,6 +6425,13 @@ MonoBehaviour:
   looking: 0
   lookWeight: 0
   gazeTarget: {fileID: 1536397473}
+  Alien: {fileID: 413500523}
+--- !u!4 &413500533 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 898abc9fc1eaaaa44bb5538464fd59a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 576796126}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &413671347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10131,15 +10194,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 898abc9fc1eaaaa44bb5538464fd59a5,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'metarig'\n\tTransform 'Finger2_01.R'\n\tTransform
-        'Neck'\n\tTransform 'Finger3_02.L'\n\tTransform 'Thumb02.R'\n\tTransform
-        'Lower Arm.R'\n\tTransform 'Finger1_01.L'\n\tTransform 'Finger2_02.L'\n\tTransform
-        'Thumb02.L'\n\tTransform 'Upper Arm.L'\n\tand more ...\n\tFrom animation
-        clip 'HoldingDown'\n\tFrom animation clip 'CarryingIdle'\n\tFrom animation
-        clip 'FloatingDown'\n\tFrom animation clip 'Landing'\n\tFrom animation clip
-        'Reacting'\n\tFrom animation clip 'SlowWave'\n\tFrom animation clip 'Bored'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 898abc9fc1eaaaa44bb5538464fd59a5,
         type: 3}
@@ -20816,21 +20871,22 @@ AudioSource:
   m_GameObject: {fileID: 1047024892}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 5718ea8f9dccd8943a178b188dceb979,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 856a6e4e04e4a8d468cd22073b9bcf54, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.455
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 1
-  SpatializePostEffects: 1
+  SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 0.35769308
   MaxDistance: 300
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -36536,7 +36592,7 @@ MonoBehaviour:
   LightG: {fileID: 758962140}
   UFO: {fileID: 0}
   mShader: {fileID: 2100000, guid: b1f9ee7634a9a0340bc6abd5a1fca1a5, type: 2}
-  lightsOn: 1
+  lightsOn: 0
   lightsToggle: 0
   onBoard: 0
   descending: 0
@@ -47868,7 +47924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148982136821}
   m_LocalRotation: {x: -0.004462475, y: 0.5163592, z: 0.0026907478, w: 0.8563563}
-  m_LocalPosition: {x: -2.534818, y: 0.731, z: 0.6032668}
+  m_LocalPosition: {x: -2.649, y: 0.804, z: 0.6032668}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -47897,8 +47953,8 @@ GameObject:
   - component: {fileID: 3469287836615174890}
   - component: {fileID: 1711813856111042080}
   - component: {fileID: 80266084}
-  - component: {fileID: 80266088}
   - component: {fileID: 80266083}
+  - component: {fileID: 3469287836615174891}
   m_Layer: 7
   m_Name: Flashlight
   m_TagString: Untagged
@@ -48027,6 +48083,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148982136821}
   m_Mesh: {fileID: 2534964839176971238, guid: ceecd93159b7ffa48be8893fd7485169, type: 3}
+--- !u!65 &3469287836615174891
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148982136821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 2.5802064}
+  m_Center: {x: -0.023523273, y: 0.026551336, z: -0.06458177}
 --- !u!1 &3471301587888233696
 GameObject:
   m_ObjectHideFlags: 0
